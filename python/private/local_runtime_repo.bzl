@@ -112,6 +112,12 @@ def _local_runtime_repo_impl(rctx):
         info["INSTSONAME"],
     ]
 
+    if repo_utils.get_platforms_os_name(rctx) == 'windows':
+        shared_lib_names.append("python{major}{minor}.lib".format(**info))
+        shared_lib_names.append("python3.lib")
+
+        interpreter_path = interpreter_path.replace('\\', '/')
+
     # In some cases, the value may be empty. Not clear why.
     shared_lib_names = [v for v in shared_lib_names if v]
 
