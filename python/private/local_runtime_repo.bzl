@@ -112,6 +112,9 @@ def _local_runtime_repo_impl(rctx):
         info["INSTSONAME"],
     ]
 
+    print("Processing", info)
+    print("Working on", repo_utils.get_platforms_os_name(rctx))
+
     if repo_utils.get_platforms_os_name(rctx) == 'windows':
         shared_lib_names.append("python{major}{minor}.lib".format(**info))
         shared_lib_names.append("python3.lib")
@@ -124,6 +127,8 @@ def _local_runtime_repo_impl(rctx):
     # In some cases, the same value is returned for multiple keys. Not clear why.
     shared_lib_names = {v: None for v in shared_lib_names}.keys()
     shared_lib_dir = info["LIBDIR"]
+
+    print("Libs in", shared_lib_names, "dir", shared_lib_dir)
 
     # The specific files are symlinked instead of the whole directory
     # because it can point to a directory that has more than just
