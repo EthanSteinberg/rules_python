@@ -128,6 +128,9 @@ def _local_runtime_repo_impl(rctx):
     shared_lib_names = {v: None for v in shared_lib_names}.keys()
     shared_lib_dir = info["LIBDIR"]
 
+    if shared_lib_dir is None:
+        shared_lib_dir = info["LIBDEST"] + "../libs"
+
     print("Libs in", shared_lib_names, "dir", shared_lib_dir)
 
     # The specific files are symlinked instead of the whole directory
